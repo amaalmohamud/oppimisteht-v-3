@@ -32,7 +32,7 @@
 </main>
 
 <script>
-fetch("https://tie.digitraffic.fi/api/v1/metadata/camera-stations")
+fetch("https://tie.digitraffic.fi/api/weathercam/v1/stations")
 .then(function(response) {
     return response.json();
 })
@@ -42,16 +42,12 @@ fetch("https://tie.digitraffic.fi/api/v1/metadata/camera-stations")
 
     for (let i = 0; i < 5; i++) {
 
-        teksti += "<h3>" + data.features[i].properties.names.fi + "</h3>";
-        teksti += "<p>Sijainti: " + data.features[i].geometry.coordinates + "</p>";
+        teksti += "<h3>" + data.features[i].properties.name + "</h3>";
+        teksti += "<p>ID: " + data.features[i].id + "</p>";
         teksti += "<hr>";
     }
 
     document.getElementById("vastaus").innerHTML = teksti;
-})
-.catch(function(error) {
-    document.getElementById("vastaus").innerHTML =
-        "<p>Kameradata ei latautunut</p>";
 });
 </script>
 
