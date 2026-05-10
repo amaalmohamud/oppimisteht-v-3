@@ -33,7 +33,8 @@ body {
 }
 
 main {
-    padding: 16px;
+    padding: 20px;
+    margin-top: 60px;
 }
 
 @media screen and (max-width: 400px) {
@@ -67,4 +68,10 @@ main {
 #vastaus img {
     max-width: 100%;
     height: auto;
+    margin-top: 10px;
+    border-radius: 10px;
 }
+#vastaus {
+    margin-top: 20px;
+}
+
