@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <title>Liikennekamerat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="topnav" id="myTopnav">
+    <a href="index.html">Etusivu</a>
+    <a href="digicafe.html">Digi Cafe</a>
+    <a href="palaveri.html">Palaveri</a>
+    <a href="tyot.html">Työpaikat</a>
+    <a href="tapahtumat.html">Tapahtumat</a>
+    <a href="saa.html">Sää</a>
+    <a href="liikennekamera.html" class="active">Kamerat</a>
+    <a href="junat.html">Junat</a>
+</div>
+
+<main style="padding-left:16px">
+
+    <h1>Liikennekamerat</h1>
+    <p>Haetaan liikennekameran kuva API:sta.</p>
+
+    <div id="vastaus"></div>
+
+</main>
+
+<script>
+fetch("https://tie.digitraffic.fi/api/v1/metadata/camera-stations")
+.then(function(response) {
+    return response.json();
+})
+.then(function(data) {
+
+    let teksti = "";
+
+    // otetaan ensimmäinen kamera esimerkkinä
+    let asema = data.features[0];
+
+    teksti += "<h2>" + asema.properties.names.fi + "</h2>";
+    teksti += "<p>Sijainti: " + asema.geometry.coordinates + "</p>";
+
+    document.getElementById("vastaus").innerHTML = teksti;
+})
+.catch(function(error) {
+    document.getElementById("vastaus").innerHTML =
+        "<p>Kameradata ei latautunut</p>";
+});
+</script>
+
+</body>
+</html>
