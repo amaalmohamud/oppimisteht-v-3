@@ -40,11 +40,12 @@ fetch("https://tie.digitraffic.fi/api/v1/metadata/camera-stations")
 
     let teksti = "";
 
-    // otetaan ensimmäinen kamera esimerkkinä
-    let asema = data.features[0];
+    for (let i = 0; i < 5; i++) {
 
-    teksti += "<h2>" + asema.properties.names.fi + "</h2>";
-    teksti += "<p>Sijainti: " + asema.geometry.coordinates + "</p>";
+        teksti += "<h3>" + data.features[i].properties.names.fi + "</h3>";
+        teksti += "<p>Sijainti: " + data.features[i].geometry.coordinates + "</p>";
+        teksti += "<hr>";
+    }
 
     document.getElementById("vastaus").innerHTML = teksti;
 })
