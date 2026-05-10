@@ -32,22 +32,15 @@
 </main>
 
 <script>
-fetch("https://api.visittampere.fi/api/v1/events")
-.then(function(response) {
-    return response.json();
-})
+fetch("https://open-api.myhelsinki.fi/v1/events/")
 .then(function(data) {
 
     let teksti = "";
 
-    for (let i = 0; i < data.length; i++) {
-        teksti += "<h3>" + data[i].name + "</h3>";
-        teksti += "<p>" + data[i].description + "</p>";
+    for (let i = 0; i < 5; i++) {
 
-        if (data[i].images && data[i].images.length > 0) {
-            teksti += "<img src='" + data[i].images[0].url + "' style='max-width:300px;'>";
-        }
-
+        teksti += "<h3>" + data.data[i].name.fi + "</h3>";
+        teksti += "<p>" + data.data[i].info.long_description + "</p>";
         teksti += "<hr>";
     }
 
