@@ -32,7 +32,7 @@
 </main>
 
 <script>
-fetch("https://open-api.myhelsinki.fi/v1/events/")
+fetch("https://api.visittampere.com/api/v1/visittampere/event/published/all/?format=json&lang=fi")
 .then(function(response) {
     return response.json();
 })
@@ -40,18 +40,15 @@ fetch("https://open-api.myhelsinki.fi/v1/events/")
 
     let teksti = "";
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < data.length; i++) {
 
-        teksti += "<h3>" + data.data[i].name.fi + "</h3>";
-        teksti += "<p>" + data.data[i].description.intro + "</p>";
+        teksti += "<h3>" + data[i].name + "</h3>";
+        teksti += "<p>" + data[i].description + "</p>";
+        teksti += "<p>" + data[i].url + "</p>";
         teksti += "<hr>";
     }
 
     document.getElementById("vastaus").innerHTML = teksti;
-})
-.catch(function(error) {
-    document.getElementById("vastaus").innerHTML =
-        "<p>Virhe datan haussa</p>";
 });
 </script>
 
