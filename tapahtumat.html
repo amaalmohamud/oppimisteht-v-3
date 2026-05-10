@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <title>Tapahtumat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="topnav" id="myTopnav">
+    <a href="index.html">Etusivu</a>
+    <a href="digicafe.html">Digi Cafe</a>
+    <a href="palaveri.html">Palaveri</a>
+    <a href="tyot.html">Työpaikat</a>
+    <a href="tapahtumat.html" class="active">Tapahtumat</a>
+    <a href="saa.html">Sää</a>
+    <a href="liikennekamera.html">Kamerat</a>
+    <a href="junat.html">Junat</a>
+</div>
+
+<main style="padding-left:16px">
+
+    <h1>Tampereen tapahtumat</h1>
+    <p>Haetaan tapahtumat API:sta.</p>
+
+    <div id="vastaus"></div>
+
+</main>
+
+<script>
+fetch("https://api.visittampere.fi/api/v1/events")
+.then(function(response) {
+    return response.json();
+})
+.then(function(data) {
+
+    let teksti = "";
+
+    for (let i = 0; i < data.length; i++) {
+        teksti += "<h3>" + data[i].name + "</h3>";
+        teksti += "<p>" + data[i].description + "</p>";
+
+        if (data[i].images && data[i].images.length > 0) {
+            teksti += "<img src='" + data[i].images[0].url + "' style='max-width:300px;'>";
+        }
+
+        teksti += "<hr>";
+    }
+
+    document.getElementById("vastaus").innerHTML = teksti;
+})
+.catch(function(error) {
+    document.getElementById("vastaus").innerHTML =
+        "<p>Virhe datan haussa</p>";
+});
+</script>
+
+</body>
+</html>
