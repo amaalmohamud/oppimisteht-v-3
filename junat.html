@@ -44,7 +44,7 @@ fetch("https://rata.digitraffic.fi/api/v1/live-trains")
     for (let i = 0; i < 5; i++) {
 
         teksti += "<h3>Juna " + data[i].trainNumber + "</h3>";
-        teksti += "<p>Lähtöasema: " + data[i].timeTableRows[0].stationShortCode + "</p>";
+        teksti += "<p>Lähtöasema: " + data[i].trainType + " " + data[i].trainNumber + "</p>";
         teksti += "<p>Viimeisin päivitys: " + data[i].timestamp + "</p>";
 
         teksti += "<hr>";
