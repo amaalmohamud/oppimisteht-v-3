@@ -32,7 +32,7 @@
 </main>
 
 <script>
-fetch("https://rata.digitraffic.fi/api/v1/live-trains")
+fetch("https://rata.digitraffic.fi/api/v1/live-trains/station/HKI?departing_trains=10&include_nonstopping=false")
 .then(function(response) {
     return response.json();
 })
@@ -40,18 +40,25 @@ fetch("https://rata.digitraffic.fi/api/v1/live-trains")
 
     let teksti = "";
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < data.length; i++) {
 
-        teksti += "<h3>Juna " + data[i].trainType + " " + data[i].trainNumber + "</h3>";
-        teksti += "<p>Lähtöasema: HKI</p>";
-        teksti += "<hr>";
+        for (let j = 0; j < data[i].timeTableRows.length; j++) {
+
+            if (data[i].timeTableRows[j].stationShortCode == "TPE"
+                && data[i].timeTableRows[j].type == "ARRIVAL") {
+
+                teksti += "<h3>Juna " + data[i].trainType + " " + data[i].trainNumber + "</h3>";
+
+                let pvm = data[i].timeTableRows[j].scheduledTime;
+                let aika = pvm.substr(0,10) + " klo " + pvm.substr(11,5);
+
+                teksti += "<p>Aika: " + aika + "</p>";
+                teksti += "<hr>";
+            }
+        }
     }
 
     document.getElementById("vastaus").innerHTML = teksti;
-})
-.catch(function(error) {
-    document.getElementById("vastaus").innerHTML =
-        "<p>Junadata ei latautunut</p>";
 });
 </script>
 
