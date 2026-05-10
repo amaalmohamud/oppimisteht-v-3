@@ -32,25 +32,23 @@
 </main>
 
 <script>
-fetch("https://api.open-meteo.com/v1/forecast?latitude=60.17&longitude=24.94&current_weather=true")
+fetch("https://api.openweathermap.org/data/2.5/weather?q=helsinki&units=metric&appid=665ecd56dfc08dbb50feb8b8f5034e28")
 .then(function(response) {
     return response.json();
 })
 .then(function(data) {
 
-    let w = data.current_weather;
+    let teksti = "";
 
-    let teksti =
-        "<h2>Helsinki</h2>" +
-        "<p>Lämpötila: " + w.temperature + " °C</p>" +
-        "<p>Tuuli: " + w.windspeed + " m/s</p>" +
-        "<p>Aika: " + w.time + "</p>";
+    teksti += "<h2>" + data.name + "</h2>";
+    teksti += "<p>Sää: " + data.weather[0].description + "</p>";
+    teksti += "<p>Lämpötila: " + data.main.temp + " °C</p>";
+    teksti += "<p>Tuuli: " + data.wind.speed + " m/s</p>";
+
+    let kuva = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+    teksti += "<img src='" + kuva + "'>";
 
     document.getElementById("vastaus").innerHTML = teksti;
-})
-.catch(function(error) {
-    document.getElementById("vastaus").innerHTML =
-        "<p>Sään haku epäonnistui</p>";
 });
 </script>
 
