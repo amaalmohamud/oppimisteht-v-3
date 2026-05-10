@@ -3,6 +3,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ================= NAV ================= */
+
 .topnav {
     overflow: hidden;
     background-color: #333;
@@ -28,35 +30,49 @@ body {
     color: white;
 }
 
+/* hampurilaisikoni */
 .topnav .icon {
     display: none;
 }
+
+/* ================= MAIN ================= */
 
 main {
     padding: 20px;
     margin-top: 60px;
 }
 
-@media screen and (max-width: 400px) {
+/* ================= API OUTPUT ================= */
+
+#vastaus {
+    margin-top: 20px;
+}
+
+#vastaus img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+/* ================= RESPONSIVE MENU ================= */
+
+@media screen and (max-width: 600px) {
+
+    /* piilota linkit */
     .topnav a:not(:first-child) {
         display: none;
     }
 
-    .topnav a.icon {
-        float: right;
+    /* näytä hampurilaisikoni */
+    .topnav .icon {
         display: block;
+        float: right;
     }
-}
 
-@media screen and (max-width: 400px) {
+    /* kun menu auki */
     .topnav.responsive {
         position: relative;
-    }
-
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
     }
 
     .topnav.responsive a {
@@ -64,14 +80,10 @@ main {
         display: block;
         text-align: left;
     }
-}
-#vastaus img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-#vastaus {
-    margin-top: 20px;
-}
 
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
